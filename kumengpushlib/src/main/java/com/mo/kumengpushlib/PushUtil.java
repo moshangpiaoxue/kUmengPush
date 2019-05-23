@@ -29,6 +29,10 @@ public class PushUtil {
      */
     private static Class<KNotificationBroadcast> notificationBroadcastClass = null;
 
+    public static String getmDeviceToken() {
+        return TextUtils.isEmpty(mDeviceToken) ? mPushAgent.getRegistrationId() : mDeviceToken;
+    }
+
     /**
      * 初始化友盟配置（所有友盟的功能都要执行此操作，如：分享、推送等）
      *
@@ -76,6 +80,7 @@ public class PushUtil {
         //设置接收通知服务
         mPushAgent.setPushIntentServiceClass(KPushIntentService.class);
     }
+
     public static Class<KNotificationBroadcast> getBroadcast() {
         return notificationBroadcastClass == null ? KNotificationBroadcast.class : notificationBroadcastClass;
     }
