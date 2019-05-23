@@ -1,0 +1,2 @@
+app目录下的清单文件 appliction节点里 添加
+tools:replace="android:allowBackup"
