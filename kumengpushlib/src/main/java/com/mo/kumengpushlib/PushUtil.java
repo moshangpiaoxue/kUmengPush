@@ -28,19 +28,11 @@ public class PushUtil {
      * 通知点击消失事件监听广播
      */
     private static Class<KNotificationBroadcast> notificationBroadcastClass = null;
-private static int icon;
+    /**
+    * 通知栏小图标（后期把通知栏封了）
+    */
+    private static int icon;
 
-    public static int getIcon() {
-        return icon==0?R.mipmap.aa:icon;
-    }
-
-    public static void setIcon(int icon) {
-        PushUtil.icon = icon;
-    }
-
-    public static String getmDeviceToken() {
-        return TextUtils.isEmpty(mDeviceToken) ? mPushAgent.getRegistrationId() : mDeviceToken;
-    }
 
     /**
      * 初始化友盟配置（所有友盟的功能都要执行此操作，如：分享、推送等）
@@ -86,9 +78,47 @@ private static int icon;
                 LogPush.Log("注册失败：-------->  " + "s:" + s + ",s1:" + s1);
             }
         });
+        //获取DeviceToken  递归
+        if (TextUtils.isEmpty(mDeviceToken)) {
+            mDeviceToken= mPushAgent.getRegistrationId();
+//            Timer timer = new Timer();
+//            timer.schedule(new TimerTask() {
+//                @Override
+//                public void run() {
+//                    int count = 0;
+//                    if (null ==  MyApplication.mydeviceToken && count < 10) {
+//                        String temp = mPushAgent.getRegistrationId();
+//                        if (temp == null || temp.isEmpty()) {
+//                            count++;
+//                        } else {
+//                            MyApplication.mydeviceToken = temp;
+//                            count = 0;
+//                        }
+//                    } else {
+//                        count = 0;
+//                        cancel();
+//                    }
+//                }
+//            }, 0, 800);
+        }
         mPushAgent.setNotificaitonOnForeground(true);
         //设置接收通知服务
         mPushAgent.setPushIntentServiceClass(KPushIntentService.class);
+    }
+
+    public static PushAgent getmPushAgent() {
+        return mPushAgent;
+    }
+    public static int getIcon() {
+        return icon == 0 ? R.mipmap.aa : icon;
+    }
+
+    public static void setIcon(int icon) {
+        PushUtil.icon = icon;
+    }
+
+    public static String getmDeviceToken() {
+        return TextUtils.isEmpty(mDeviceToken) ? mPushAgent.getRegistrationId() : mDeviceToken;
     }
 
     public static Class<KNotificationBroadcast> getBroadcast() {

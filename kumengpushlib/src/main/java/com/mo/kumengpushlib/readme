@@ -1,2 +1,17 @@
-app目录下的清单文件 appliction节点里 添加
+集成注意：
+1、app目录下的清单文件 appliction节点里 添加
 tools:replace="android:allowBackup"
+2、集成方法
+ compile ('com.github.moshangpiaoxue:kUmengPush:0.0.6', {
+        exclude group: 'com.android.support', module: 'appcompat-v7'
+        exclude group: 'com.umeng.umsdk', module: 'common'
+        exclude group: 'com.umeng.umsdk', module: 'utdid'
+    })
+    本库里一共依赖了4个库
+         api 'com.android.support:appcompat-v7:27.1.1'
+        api 'com.umeng.umsdk:common:1.5.4'
+        api 'com.umeng.umsdk:utdid:1.1.5.3'
+        api 'com.umeng.umsdk:push:5.0.2'
+
+       其中；除了push库不可能会产生依赖重复的冲突，其余都可能冲突，尤其是友盟的推送一般和分享一起用，
+       所以common和utdid库基本上肯定会冲突，v7的话就看情况了，哪个不冲突就注掉
