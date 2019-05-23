@@ -64,7 +64,7 @@ public class KPushIntentService extends UmengMessageService {
         builder.setAutoCancel(false);
         Notification mNotification = builder.build();
         //notification通知栏图标
-        mNotification.icon = R.mipmap.ic_launcher;
+        mNotification.icon = R.mipmap.aa;
         mNotification.defaults |= Notification.DEFAULT_SOUND;
         mNotification.defaults |= Notification.DEFAULT_VIBRATE;
         mNotification.tickerText = msg.ticker;

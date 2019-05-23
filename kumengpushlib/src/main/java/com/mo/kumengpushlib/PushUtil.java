@@ -28,6 +28,15 @@ public class PushUtil {
      * 通知点击消失事件监听广播
      */
     private static Class<KNotificationBroadcast> notificationBroadcastClass = null;
+private static int icon;
+
+    public static int getIcon() {
+        return icon==0?R.mipmap.aa:icon;
+    }
+
+    public static void setIcon(int icon) {
+        PushUtil.icon = icon;
+    }
 
     public static String getmDeviceToken() {
         return TextUtils.isEmpty(mDeviceToken) ? mPushAgent.getRegistrationId() : mDeviceToken;
