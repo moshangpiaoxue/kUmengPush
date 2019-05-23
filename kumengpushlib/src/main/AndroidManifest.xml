@@ -1,0 +1,8 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.mo.kumengpushlib">
+
+    <application>
+        <service android:name=".KPushIntentService" />
+        <receiver android:name=".KNotificationBroadcast" />
+    </application>
+</manifest>
