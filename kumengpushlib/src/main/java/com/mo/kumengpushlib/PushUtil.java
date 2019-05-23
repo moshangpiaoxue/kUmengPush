@@ -68,6 +68,7 @@ public class PushUtil {
             @Override
             public void onSuccess(String deviceToken) {
                 mDeviceToken = deviceToken;
+
                 LogPush.Log("注册成功：deviceToken：-------->  " + deviceToken);
             }
 
