@@ -15,3 +15,7 @@ tools:replace="android:allowBackup"
 
        其中；除了push库不可能会产生依赖重复的冲突，其余都可能冲突，尤其是友盟的推送一般和分享一起用，
        所以common和utdid库基本上肯定会冲突，v7的话就看情况了，哪个不冲突就注掉
+
+  3、新建广播，继承KNotificationBroadcast类  复写onClick（）和onDismiss（）方法，在里面写具体的逻辑
+
+  4、
