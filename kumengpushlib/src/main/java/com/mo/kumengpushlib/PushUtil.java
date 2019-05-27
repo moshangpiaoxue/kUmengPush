@@ -28,7 +28,7 @@ public class PushUtil {
      * 通知栏小图标（后期把通知栏封了）
      */
     private static int icon;
-
+private static String mDeviceToken;
 
     /**
      * 初始化友盟配置（所有友盟的功能都要执行此操作，如：分享、推送等）
@@ -67,9 +67,10 @@ public class PushUtil {
         mPushAgent.register(new IUmengRegisterCallback() {
             @Override
             public void onSuccess(String deviceToken) {
+                mDeviceToken=deviceToken;
                 LogPush.Log("注册成功：deviceToken：-------->  " + deviceToken);
                 if (callBack != null) {
-                    callBack.getToken(TextUtils.isEmpty(deviceToken) ? mPushAgent.getRegistrationId() : deviceToken);
+                    callBack.getToken(TextUtils.isEmpty(mDeviceToken) ? mPushAgent.getRegistrationId() : mDeviceToken);
                 }
 
             }
@@ -85,6 +86,12 @@ public class PushUtil {
         mPushAgent.setNotificaitonOnForeground(true);
         //设置接收通知服务
         mPushAgent.setPushIntentServiceClass(KPushIntentService.class);
+    }
+/**
+* 有时候，用 Token的时候 但是这个时候注册的水貂还没返回来，先拿mPushAgent.getRegistrationId()对付一下，不然真报空
+*/
+    public static String getDeviceToken() {
+        return TextUtils.isEmpty(mDeviceToken) ? mPushAgent.getRegistrationId() : mDeviceToken;
     }
 
     public static PushAgent getmPushAgent() {
