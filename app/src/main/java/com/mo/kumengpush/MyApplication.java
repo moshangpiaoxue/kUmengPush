@@ -14,6 +14,6 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         PushUtil.init(this, "5ce6063b3fc195b245000b70", "Umeng", 1, "406c9c0ce0a350e990a69fdde131f6ba");
-        PushUtil.setting(this, BB.class);
+        PushUtil.pushSetting(this, R.mipmap.aa,BB.class,null);
     }
 }
