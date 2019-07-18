@@ -9,5 +9,4 @@ import com.umeng.message.entity.UMessage;
  */
 public interface TokenCallBack {
     void getToken(String deviceToken);
-    void reciveMsg( UMessage msg);
 }

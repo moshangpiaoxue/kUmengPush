@@ -7,7 +7,6 @@ import android.text.TextUtils;
 import com.umeng.commonsdk.UMConfigure;
 import com.umeng.message.IUmengRegisterCallback;
 import com.umeng.message.PushAgent;
-import com.umeng.message.entity.UMessage;
 
 /**
  * @ author：mo
@@ -29,7 +28,7 @@ public class PushUtil {
      * 通知栏小图标（后期把通知栏封了）
      */
     private static int icon;
-private static String mDeviceToken;
+    private static String mDeviceToken;
 
     /**
      * 初始化友盟配置（所有友盟的功能都要执行此操作，如：分享、推送等）
@@ -54,6 +53,10 @@ private static String mDeviceToken;
      * @param callBack                   Token结果的回调
      */
     public static void pushSetting(Context context, int icon, Class<?> notificationBroadcastClass, final TokenCallBack callBack) {
+        pushSetting(context, icon, notificationBroadcastClass, null, callBack);
+    }
+
+    public static void pushSetting(Context context, int icon, Class<?> notificationBroadcastClass, Class<KPushIntentService> service, final TokenCallBack callBack) {
         PushUtil.icon = icon;
         try {
             PushUtil.notificationBroadcastClass = (Class<KNotificationBroadcast>) notificationBroadcastClass;
@@ -68,7 +71,7 @@ private static String mDeviceToken;
         mPushAgent.register(new IUmengRegisterCallback() {
             @Override
             public void onSuccess(String deviceToken) {
-                mDeviceToken=deviceToken;
+                mDeviceToken = deviceToken;
                 LogPush.Log("注册成功：deviceToken：-------->  " + deviceToken);
                 if (callBack != null) {
                     callBack.getToken(TextUtils.isEmpty(mDeviceToken) ? mPushAgent.getRegistrationId() : mDeviceToken);
@@ -86,16 +89,12 @@ private static String mDeviceToken;
         });
         mPushAgent.setNotificaitonOnForeground(true);
         //设置接收通知服务
-        mPushAgent.setPushIntentServiceClass(new KPushIntentService(){
-            @Override
-            public void showNotification(Context context, UMessage msg) {
-                super.showNotification(context, msg);
-            }
-        }.getClass());
+        mPushAgent.setPushIntentServiceClass(service == null ? KPushIntentService.class : service);
     }
-/**
-* 有时候，用 Token的时候 但是这个时候注册的水貂还没返回来，先拿mPushAgent.getRegistrationId()对付一下，不然真报空
-*/
+
+    /**
+     * 有时候，用 Token的时候 但是这个时候注册的水貂还没返回来，先拿mPushAgent.getRegistrationId()对付一下，不然真报空
+     */
     public static String getDeviceToken() {
         return TextUtils.isEmpty(mDeviceToken) ? mPushAgent.getRegistrationId() : mDeviceToken;
     }
