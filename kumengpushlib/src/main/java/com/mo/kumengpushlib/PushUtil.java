@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import com.umeng.commonsdk.UMConfigure;
 import com.umeng.message.IUmengRegisterCallback;
 import com.umeng.message.PushAgent;
+import com.umeng.message.entity.UMessage;
 
 /**
  * @ author：mo
@@ -85,7 +86,12 @@ private static String mDeviceToken;
         });
         mPushAgent.setNotificaitonOnForeground(true);
         //设置接收通知服务
-        mPushAgent.setPushIntentServiceClass(KPushIntentService.class);
+        mPushAgent.setPushIntentServiceClass(new KPushIntentService(){
+            @Override
+            public void showNotification(Context context, UMessage msg) {
+                super.showNotification(context, msg);
+            }
+        }.getClass());
     }
 /**
 * 有时候，用 Token的时候 但是这个时候注册的水貂还没返回来，先拿mPushAgent.getRegistrationId()对付一下，不然真报空
