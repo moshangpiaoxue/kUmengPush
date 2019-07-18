@@ -56,7 +56,7 @@ public class PushUtil {
         pushSetting(context, icon, notificationBroadcastClass, null, callBack);
     }
 
-    public static void pushSetting(Context context, int icon, Class<?> notificationBroadcastClass, Class<KPushIntentService> service, final TokenCallBack callBack) {
+    public static void pushSetting(Context context, int icon, Class<?> notificationBroadcastClass, Class<?> service, final TokenCallBack callBack) {
         PushUtil.icon = icon;
         try {
             PushUtil.notificationBroadcastClass = (Class<KNotificationBroadcast>) notificationBroadcastClass;
@@ -89,7 +89,7 @@ public class PushUtil {
         });
         mPushAgent.setNotificaitonOnForeground(true);
         //设置接收通知服务
-        mPushAgent.setPushIntentServiceClass(service == null ? KPushIntentService.class : service);
+        mPushAgent.setPushIntentServiceClass((Class<KPushIntentService>)(service == null ? KPushIntentService.class : service));
     }
 
     /**
