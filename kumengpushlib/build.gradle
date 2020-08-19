@@ -41,7 +41,7 @@ dependencies {
 //
 //    api 'com.umeng.umsdk:xiaomi-push:3.6.9'
 //    api 'com.umeng.umsdk:xiaomi-umengaccs:1.0.9'
-
+    api 'androidx.appcompat:appcompat:1.1.0'
     api 'com.umeng.umsdk:common:1.5.4'
     api 'com.umeng.umsdk:utdid:1.1.5.3'
     api 'com.umeng.umsdk:push:5.0.2'
