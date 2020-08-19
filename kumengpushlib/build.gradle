@@ -31,7 +31,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    api 'com.android.support:appcompat-v7:27.1.1'
+//    api 'com.android.support:appcompat-v7:27.1.1'
 //    api 'com.umeng.umsdk:huawei-basetb:2.6.0.301'
 //    api 'com.umeng.umsdk:huawei-pushtb:2.6.0.301'
 //    api 'com.umeng.umsdk:huawei-umengaccs:1.1.3'
